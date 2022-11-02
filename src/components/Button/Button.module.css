@@ -1,0 +1,15 @@
+.custom_btn {
+    background: #D90429;
+    color: #EDF2F4;
+    border-radius: 10px;
+    border: none;
+    padding: 14px 28px;
+    transition-duration: 0.4s;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    box-shadow: 3px 3px rgb(0 0 0 / 0.2);
+  }
+  
+  .custom_btn:hover {
+    background: #EF233C
+  }
