@@ -50,7 +50,7 @@ const MediaContainer = ({ }) => {
 
                 drawCanvas(pose, videoWidth, videoHeight, canvasRef);
                 });
-            });
+            }, 100);
         }
     };
 
