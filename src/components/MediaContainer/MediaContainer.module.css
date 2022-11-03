@@ -1,19 +1,23 @@
 .mediaContainer {
-    background-color: #Ef233C;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 740px;
-    height: 540px;
-    border-radius: 25px;
-    box-shadow: 25px 15px #D90429;
+  background-color: #Ef233C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 740px;
+  height: 540px;
+  border-radius: 25px;
+  box-shadow: 25px 15px #D90429;
 }
+
 .media {
-    width: 640px;
-    height: 480px;
-    border-radius: 25px;
+  width: 640px;
+  height: 480px;
+  border-radius: 25px;
+  /* display: none; */
 }
+
 .canvas {
-  z-index: 10;
-  background-color:rgba(255,0,0,0.5);
+  width: 640px;
+  height: 480px;
+  border-radius: 25px;
 }

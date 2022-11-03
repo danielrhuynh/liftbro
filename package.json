@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@electron/remote": "^2.0.8",
-    "@tensorflow-models/pose-detection": "^2.0.0",
     "@tensorflow-models/posenet": "^2.2.2",
     "@tensorflow/tfjs": "^4.0.0",
     "@testing-library/jest-dom": "^5.16.5",
