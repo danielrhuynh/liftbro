@@ -1571,6 +1571,11 @@
   "resolved" "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   "version" "2.0.4"
 
+"@mediapipe/pose@~0.4.0":
+  "integrity" "sha512-tD89b08CE6tF3lNNFfFTd8o4E9iOD4uKqQ++AbDv9GOImnUx5iMkMWnadQjav2sYGJ1V3qUtiHLLKfmUAW6WBg=="
+  "resolved" "https://registry.npmjs.org/@mediapipe/pose/-/pose-0.4.1633558788.tgz"
+  "version" "0.4.1633558788"
+
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   "integrity" "sha512-54/JRvkLIzzDWshCWfuhadfrfZVPiElY8Fcgmg1HroEly/EDSszzhBAsarCux+D/kOslTRquNzuyGSmUSTTHGg=="
   "resolved" "https://registry.npmjs.org/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz"
@@ -1827,10 +1832,25 @@
   dependencies:
     "defer-to-connect" "^1.0.1"
 
+"@tensorflow-models/pose-detection@^2.0.0":
+  "integrity" "sha512-e7yaVoCeqR8s6cp9obNJJ7wa5a4VL/JSmI8uJ3qjIbvDY9iQQVtX+AHleZb0FsN7IlivfGRzmFSMEl7RnPauvQ=="
+  "resolved" "https://registry.npmjs.org/@tensorflow-models/pose-detection/-/pose-detection-2.0.0.tgz"
+  "version" "2.0.0"
+  dependencies:
+    "rimraf" "^3.0.2"
+
 "@tensorflow-models/posenet@^2.2.2":
   "integrity" "sha512-0SXIksRet/IdX7WVH+JSD6W3upkGHix1hwtd3xykIoIMGR7zQ4SC5+wZcNt9ofASyxNYQoI+tUULUo4LNw0c3w=="
   "resolved" "https://registry.npmjs.org/@tensorflow-models/posenet/-/posenet-2.2.2.tgz"
   "version" "2.2.2"
+
+"@tensorflow/tfjs-backend-cpu@3.21.0":
+  "integrity" "sha512-88S21UAdzyK0CsLUrH17GPTD+26E85OP9CqmLZslaWjWUmBkeTQ5Zqyp6iK+gELnLxPx6q7JsNEeFuPv4254lQ=="
+  "resolved" "https://registry.npmjs.org/@tensorflow/tfjs-backend-cpu/-/tfjs-backend-cpu-3.21.0.tgz"
+  "version" "3.21.0"
+  dependencies:
+    "@types/seedrandom" "^2.4.28"
+    "seedrandom" "^3.0.5"
 
 "@tensorflow/tfjs-backend-cpu@4.0.0":
   "integrity" "sha512-Y9ok6VBMir1MVbkcK+h34hF4ZzHZKOrdjAOeE5eFbSuegJHY/AXWcZEU589VTnEE4AU+SUdjjfp6yvAtU17GAA=="
@@ -1838,6 +1858,26 @@
   "version" "4.0.0"
   dependencies:
     "@types/seedrandom" "^2.4.28"
+    "seedrandom" "^3.0.5"
+
+"@tensorflow/tfjs-backend-wasm@^3.13.0":
+  "integrity" "sha512-TVkJWrqukdxvIaQn9jZvtXR+7fmT7sti6NQH5OKVcBmFYIW7I3RiRRE66inVrHjEEvIVTUuW9yo9Ialn31EFIw=="
+  "resolved" "https://registry.npmjs.org/@tensorflow/tfjs-backend-wasm/-/tfjs-backend-wasm-3.21.0.tgz"
+  "version" "3.21.0"
+  dependencies:
+    "@tensorflow/tfjs-backend-cpu" "3.21.0"
+    "@types/emscripten" "~0.0.34"
+
+"@tensorflow/tfjs-backend-webgl@^3.13.0":
+  "integrity" "sha512-N4zitIAT9IX8B8oe489qM3f3VcESxGZIZvHmVP8varOQakTvTX859aaPo1s8hK1qCy4BjSGbweooZe4U8D4kTQ=="
+  "resolved" "https://registry.npmjs.org/@tensorflow/tfjs-backend-webgl/-/tfjs-backend-webgl-3.21.0.tgz"
+  "version" "3.21.0"
+  dependencies:
+    "@tensorflow/tfjs-backend-cpu" "3.21.0"
+    "@types/offscreencanvas" "~2019.3.0"
+    "@types/seedrandom" "^2.4.28"
+    "@types/webgl-ext" "0.0.30"
+    "@types/webgl2" "0.0.6"
     "seedrandom" "^3.0.5"
 
 "@tensorflow/tfjs-backend-webgl@4.0.0":
@@ -1852,7 +1892,7 @@
     "@types/webgl2" "0.0.6"
     "seedrandom" "^3.0.5"
 
-"@tensorflow/tfjs-converter@^3.0.0-rc.1":
+"@tensorflow/tfjs-converter@^3.0.0-rc.1", "@tensorflow/tfjs-converter@^3.13.0":
   "integrity" "sha512-12Y4zVDq3yW+wSjSDpSv4HnpL2sDZrNiGSg8XNiDE4HQBdjdA+a+Q3sZF/8NV9y2yoBhL5L7V4mMLDdbZBd9/Q=="
   "resolved" "https://registry.npmjs.org/@tensorflow/tfjs-converter/-/tfjs-converter-3.21.0.tgz"
   "version" "3.21.0"
@@ -1862,7 +1902,7 @@
   "resolved" "https://registry.npmjs.org/@tensorflow/tfjs-converter/-/tfjs-converter-4.0.0.tgz"
   "version" "4.0.0"
 
-"@tensorflow/tfjs-core@^3.0.0-rc.1", "@tensorflow/tfjs-core@3.21.0":
+"@tensorflow/tfjs-core@^3.0.0-rc.1", "@tensorflow/tfjs-core@^3.13.0", "@tensorflow/tfjs-core@3.21.0":
   "integrity" "sha512-YSfsswOqWfd+M4bXIhT3hwtAb+IV8+ODwIxwdFR/7jTAPZP1wMVnSlpKnXHAN64HFOiP+Tm3HmKusEZ0+09A0w=="
   "resolved" "https://registry.npmjs.org/@tensorflow/tfjs-core/-/tfjs-core-3.21.0.tgz"
   "version" "3.21.0"
@@ -2043,6 +2083,11 @@
   "version" "3.4.35"
   dependencies:
     "@types/node" "*"
+
+"@types/emscripten@~0.0.34":
+  "integrity" "sha512-QSb9ojDincskc+uKMI0KXp8e1NALFINCrMlp8VGKGcTSxeEyRTTKyjWw75NYrCZHUsVEEEpr1tYHpbtaC++/sQ=="
+  "resolved" "https://registry.npmjs.org/@types/emscripten/-/emscripten-0.0.34.tgz"
+  "version" "0.0.34"
 
 "@types/eslint-scope@^3.7.3":
   "integrity" "sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA=="

@@ -10,14 +10,13 @@
 }
 
 .media {
-  width: 640px;
-  height: 480px;
-  border-radius: 25px;
-  /* display: none; */
+  width: 0%;
+  height: 0%;
 }
 
 .canvas {
   width: 640px;
   height: 480px;
   border-radius: 25px;
+  z-index: 2;
 }
