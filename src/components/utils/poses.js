@@ -42,7 +42,7 @@
    var spans = document.getElementsByClassName('property-name');
    for (var i = 0; i < spans.length; i++) {
      var text = spans[i].textContent || spans[i].innerText;
-     if (text == propertyText) {
+     if (text === propertyText) {
        spans[i].parentNode.parentNode.style = liCssString;
        if (spanCssString !== '') {
          spans[i].style = spanCssString;

@@ -1,3 +1,16 @@
 .home {
     padding: 20px;
 }
+
+.gridContainer {
+    padding: 24px;
+    margin: 0px;
+}
+
+.gridItem {
+    padding: 0px;
+}
+
+.toolbar {
+    justify-content: space-between;
+}

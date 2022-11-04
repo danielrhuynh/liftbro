@@ -1,5 +1,4 @@
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import LandingPage from './components/Launch';
 import Home from './components/Home';
 import {Routes, Route} from 'react-router-dom';
