@@ -10,5 +10,10 @@ export const muiComponents = {
         borderRadius: '5px',
         width: '30%',
         boxShadow: '2px 2px #2B2D42',
+    },
+    muiInputLabel: {
+        position: 'absolute', 
+        top: '14px', 
+        left: '-4px',
     }
 }

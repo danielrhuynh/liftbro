@@ -60,7 +60,6 @@ const MediaContainer = () => {
         <div className={styles.mediaContainer}>
             <Webcam className={styles.media} ref={webcamRef} />
             <canvas className={styles.canvas} ref={canvasRef} />
-
         </div>
     );
 };
