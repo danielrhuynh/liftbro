@@ -3,7 +3,7 @@ import { muiComponents } from '../muiComponentsOverride';
 import Button from '../Button/Button';
 import styles from './LiftForm.module.css';
 
-const LiftForm = (handleWorkoutSelect, workoutState) => {
+const LiftForm = ({handleWorkoutSelect, workoutState, handlePoseEstimation, isPoseEstimation}) => {
     return (
         <Grid item xs className={styles.singleLineContainer}>
             <Toolbar className={styles.singleLine}>
@@ -11,7 +11,7 @@ const LiftForm = (handleWorkoutSelect, workoutState) => {
                     <InputLabel htmlFor="age-native-helper" sx={muiComponents.muiInputLabel}>Movement</InputLabel>
                     <NativeSelect
                         value={workoutState.workout}
-                        onChange={() => handleWorkoutSelect}
+                        onChange={(e) => handleWorkoutSelect(e)}
                         inputProps={{ name: 'workout', id: 'age-native-helper', }}
                         sx={{ textAlign: 'center' }}
                     >
@@ -22,8 +22,8 @@ const LiftForm = (handleWorkoutSelect, workoutState) => {
                     </NativeSelect>
                     <FormHelperText>Select training data type</FormHelperText>
                 </FormControl>
-                <Button variant="contained" >Collect Data</Button>
-                <Button variant="contained">Train Model</Button>
+                <Button onClick={() => handlePoseEstimation('COLLECT_DATA')} >{isPoseEstimation ? 'Stop' : 'Collect Data'}</Button>
+                <Button>Train Model</Button>
             </Toolbar>
         </Grid>
     );

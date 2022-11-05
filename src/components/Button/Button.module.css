@@ -8,6 +8,8 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
     box-shadow: 3px 3px rgb(0 0 0 / 0.2);
+    width: 150px;
+    height: 60px;
   }
   
   .custom_btn:hover {

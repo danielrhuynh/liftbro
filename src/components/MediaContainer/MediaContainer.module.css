@@ -10,13 +10,13 @@
 }
 
 .media {
-  width: 0%;
-  height: 0%;
+  border-radius: 25px;
 }
 
 .canvas {
   width: 640px;
   height: 480px;
+  position: absolute;
   border-radius: 25px;
   z-index: 2;
 }

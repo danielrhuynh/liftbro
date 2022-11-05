@@ -9,7 +9,6 @@ export const loadPosenet = async (webcamRef, canvasRef) => {
         multiplier: 0.75
     });
 
-    // setModel(loadedModel); TODO: state not being set which is caused errors -> temp fix
     setInterval(() => {
         startPoseEstimation(loadedModel, webcamRef, canvasRef);
     }, 100);

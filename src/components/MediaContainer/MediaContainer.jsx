@@ -1,16 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, forwardRef } from 'react';
 import styles from './MediaContainer.module.css';
 import Webcam from 'react-webcam'
 import {loadPosenet} from '../utils/poses';
 require('@tensorflow/tfjs-backend-webgl');
 
-const MediaContainer = () => {
-    const webcamRef = useRef(null);
-    const canvasRef = useRef(null);
-
-    useEffect(() => {
-        loadPosenet(webcamRef, canvasRef);
-    }, []);
+const MediaContainer = forwardRef((props, ref) => {
+    const webcamRef = ref.webcamRef;
+    const canvasRef = ref.canvasRef;
 
     return (
         <div className={styles.mediaContainer}>
@@ -18,6 +14,6 @@ const MediaContainer = () => {
             <canvas className={styles.canvas} ref={canvasRef} />
         </div>
     );
-};
+});
 
 export default MediaContainer;
