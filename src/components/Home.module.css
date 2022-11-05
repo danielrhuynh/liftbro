@@ -7,36 +7,3 @@
     margin: 0px;
     flex-direction: column !important;
 }
-
-.gridItem {
-    padding: 0px;
-}
-
-.toolbar {
-    justify-content: space-between;
-}
-
-.singleLineContainer {
-    width: 100%;
-    min-width: 120px;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #8D99AE;
-}
-
-.singleLine {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.muiForm {
-    padding: 10px !important;
-    border-radius: 10px;
-    background-color: #EDF2F4;
-    box-shadow: 2px 2px #2B2D42;
-}
-
-.muiSelect {
-    text-align: center !important;
-}
