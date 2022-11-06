@@ -4,7 +4,7 @@ import { muiComponents } from '../muiComponentsOverride';
 import Button from '../Button/Button';
 import styles from './LiftForm.module.css';
 
-const LiftForm = ({handleWorkoutSelect, workoutState, handlePoseEstimation, isPoseEstimation, dataCollect, handleTrainModel}) => {
+const LiftForm = ({handleWorkoutSelect, workoutState, handlePoseEstimation, isPoseEstimation, dataCollect, handleTrainModel, trainModel }) => {
     return (
         <Grid item xs className={styles.singleLineContainer}>
             <Toolbar className={styles.singleLine}>
@@ -23,7 +23,7 @@ const LiftForm = ({handleWorkoutSelect, workoutState, handlePoseEstimation, isPo
                     </NativeSelect>
                     <FormHelperText>Select training data type</FormHelperText>
                 </FormControl>
-                <Button onClick={() => handlePoseEstimation('COLLECT_DATA')}>{isPoseEstimation ? 'Collecting...' : 'Collect Data'}</Button>
+                <Button className={clsx(trainModel && styles.disabledButton)} onClick={() => handlePoseEstimation('COLLECT_DATA')} disabled={trainModel}>{isPoseEstimation ? 'Collecting...' : 'Collect Data'}</Button>
                 <Button className={clsx(dataCollect && styles.disabledButton)} onClick={() => handleTrainModel()} disabled={dataCollect}>Train Model</Button>
             </Toolbar>
         </Grid>

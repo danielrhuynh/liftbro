@@ -19,6 +19,7 @@ const Home = () => {
     const [isWaiting, setIsWaiting] = useState(false);
 
     const [dataCollect, setDataCollect] = useState(false);
+    const [trainModel, setTrainModel] = useState(false);
     const [rawData, setRawData] = useState([]);
 
     const webcamRef = useRef(null);
@@ -194,7 +195,10 @@ const Home = () => {
     const handleTrainModel = async () => {
         if (rawData.length > 0) {
             console.log('Data size: ' + rawData.length);
+            setTrainModel(true);
             const [numOfFeatures, convertedDatasetTraining, convertedDatasetValidation] = processData(rawData);
+            await runTraining(convertedDatasetTraining, convertedDatasetValidation, numOfFeatures);
+            setTrainModel(false);
         }
     };
 
@@ -207,13 +211,14 @@ const Home = () => {
             <MediaContainer ref={ref} />
             <Grid container className={styles.gridContainer}>
                 <LiftCards />
-                <LiftForm 
-                handleWorkoutSelect={handleWorkoutSelect} 
-                workoutState={workoutState} 
-                handlePoseEstimation={handlePoseEstimation} 
-                isPoseEstimation={isPoseEstimation} 
-                dataCollect={dataCollect} 
-                handleTrainModel={handleTrainModel}
+                <LiftForm
+                    handleWorkoutSelect={handleWorkoutSelect}
+                    workoutState={workoutState}
+                    handlePoseEstimation={handlePoseEstimation}
+                    isPoseEstimation={isPoseEstimation}
+                    dataCollect={dataCollect}
+                    trainModel={trainModel}
+                    handleTrainModel={handleTrainModel}
                 />
             </Grid>
             <Snackbar open={dataCollecting} autoHideDuration={2500} onClose={closeDataCollecting}>
