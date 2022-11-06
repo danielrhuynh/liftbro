@@ -6,6 +6,8 @@ import { Grid, Snackbar, Alert } from '@mui/material';
 import LiftForm from './LiftForm/LiftForm';
 import * as posenet from '@tensorflow-models/posenet';
 import { drawKeypoints, drawSkeleton } from './utils/canvas';
+import { processData } from './utils/dataProcessing';
+import { runTraining } from './utils/modelTraining';
 
 const Home = () => {
     const [model, setModel] = useState(null);
@@ -15,7 +17,9 @@ const Home = () => {
     const [dataCollecting, setDataCollecting] = useState(false);
     const [dataNotCollecting, setDataNotCollecting] = useState(false);
     const [isWaiting, setIsWaiting] = useState(false);
+
     const [dataCollect, setDataCollect] = useState(false);
+    const [rawData, setRawData] = useState([]);
 
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
@@ -27,6 +31,9 @@ const Home = () => {
     };
 
     let state = 'waiting';
+
+    const windowWidth = 640;
+    const windowHeight = 480;
 
     const openDataCollecting = () => {
         setDataCollecting(true);
@@ -103,9 +110,28 @@ const Home = () => {
                 model.estimateSinglePose(video, {
                     flipHorizontal: false
                 }).then(pose => {
+                    let inputs = [];
+                    for (let i = 0; i < pose.keypoints.length; i++) {
+                        let x = pose.keypoints[i].position.x;
+                        let y = pose.keypoints[i].position.y;
+                        if (pose.keypoints[i].score < 0.1) {
+                            x = 0;
+                            y = 0;
+                        } else {
+                            x = (x / (windowWidth / 2)) - 1;
+                            y = (y / (windowHeight / 2)) - 1;
+                        }
+                        inputs.push(x);
+                        inputs.push(y);
+                    }
+
                     console.log('STATE->' + state);
                     if (state === 'collecting') {
                         console.log(workoutState.workout);
+
+                        const rawDataRow = { xs: inputs, ys: workoutState.workout };
+                        rawData.push(rawDataRow);
+                        setRawData(rawData);
                     }
 
                     drawCanvas(pose, videoWidth, videoHeight, canvasRef);
@@ -165,6 +191,13 @@ const Home = () => {
         });
     };
 
+    const handleTrainModel = async () => {
+        if (rawData.length > 0) {
+            console.log('Data size: ' + rawData.length);
+            const [numOfFeatures, convertedDatasetTraining, convertedDatasetValidation] = processData(rawData);
+        }
+    };
+
     useEffect(() => {
         loadPosenet();
     }, []);
@@ -174,7 +207,14 @@ const Home = () => {
             <MediaContainer ref={ref} />
             <Grid container className={styles.gridContainer}>
                 <LiftCards />
-                <LiftForm handleWorkoutSelect={handleWorkoutSelect} workoutState={workoutState} handlePoseEstimation={handlePoseEstimation} isPoseEstimation={isPoseEstimation} dataCollect={dataCollect} />
+                <LiftForm 
+                handleWorkoutSelect={handleWorkoutSelect} 
+                workoutState={workoutState} 
+                handlePoseEstimation={handlePoseEstimation} 
+                isPoseEstimation={isPoseEstimation} 
+                dataCollect={dataCollect} 
+                handleTrainModel={handleTrainModel}
+                />
             </Grid>
             <Snackbar open={dataCollecting} autoHideDuration={2500} onClose={closeDataCollecting}>
                 <Alert onClose={closeDataCollecting} severity="info">

@@ -24,10 +24,10 @@
 }
 
 .disabledButton {
-    background-color: #8D99AE;
+    background-color: #87909f;
 }
 
 .disabledButton:hover {
-    background: #87909f
+    background: #8D99AE;
   }
   
