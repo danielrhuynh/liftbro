@@ -1,4 +1,4 @@
-import { Grid, Toolbar, Typography, Card, CardContent, CardActions, FormControl, InputLabel, NativeSelect, FormHelperText } from '@mui/material';
+import { Grid, Toolbar, FormControl, InputLabel, NativeSelect, FormHelperText, CircularProgress } from '@mui/material';
 import clsx from 'clsx';
 import { muiComponents } from '../muiComponentsOverride';
 import Button from '../Button/Button';
@@ -25,6 +25,7 @@ const LiftForm = ({handleWorkoutSelect, workoutState, handlePoseEstimation, isPo
                 </FormControl>
                 <Button className={clsx(trainModel && styles.disabledButton)} onClick={() => handlePoseEstimation('COLLECT_DATA')} disabled={trainModel}>{isPoseEstimation ? 'Collecting...' : 'Collect Data'}</Button>
                 <Button className={clsx(dataCollect && styles.disabledButton)} onClick={() => handleTrainModel()} disabled={dataCollect}>Train Model</Button>
+                {trainModel ? <CircularProgress color="secondary"/> : null}
             </Toolbar>
         </Grid>
     );

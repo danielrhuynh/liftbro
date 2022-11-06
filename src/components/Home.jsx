@@ -8,6 +8,7 @@ import * as posenet from '@tensorflow-models/posenet';
 import { drawKeypoints, drawSkeleton } from './utils/canvas';
 import { processData } from './utils/dataProcessing';
 import { runTraining } from './utils/modelTraining';
+import { runInference } from './utils/modelInference';
 
 const Home = () => {
     const [model, setModel] = useState(null);
@@ -21,6 +22,7 @@ const Home = () => {
     const [dataCollect, setDataCollect] = useState(false);
     const [trainModel, setTrainModel] = useState(false);
     const [rawData, setRawData] = useState([]);
+    const [snackbarTrainingError, setSnackbarTrainingError] = useState(false);
 
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
@@ -69,12 +71,23 @@ const Home = () => {
         setIsWaiting(false);
     };
 
+    const openSnackbarTrainingError = () => {
+        setSnackbarTrainingError(true);
+    };
+
+    const closeSnackbarTrainingError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbarTrainingError(false);
+    };
+
     const collectData = () => {
         setTimeout(() => {
             startPoseEstimation();
             openDataCollecting();
             state = 'collecting';
-        }, 5000);
+        }, 5000); 
 
         setTimeout(() => {
             //Potentially just call handlePoseEstimation lol
@@ -84,7 +97,7 @@ const Home = () => {
             setDataCollect(false);
             state = 'waiting';
             setIsCollectingData('inactive');
-        }, 15000);
+        }, 35000);
     };
 
     const loadPosenet = async () => {
@@ -153,6 +166,7 @@ const Home = () => {
         else {
             if (input === 'COLLECT_DATA') {
                 if (isPoseEstimation || state === 'collecting' || isCollectingData === true) {
+                    // Redundant section
                     if (isCollectingData === 'inactive') {
                         setIsPoseEstimation(current => !current);
                         stopPoseEstimation();
@@ -199,6 +213,8 @@ const Home = () => {
             const [numOfFeatures, convertedDatasetTraining, convertedDatasetValidation] = processData(rawData);
             await runTraining(convertedDatasetTraining, convertedDatasetValidation, numOfFeatures);
             setTrainModel(false);
+        } else {
+            openSnackbarTrainingError();
         }
     };
 
@@ -234,6 +250,11 @@ const Home = () => {
             <Snackbar open={isWaiting} autoHideDuration={2500} onClose={closeWait}>
                 <Alert onClose={closeWait} severity="error">
                     Please wait!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={snackbarTrainingError} autoHideDuration={2000} onClose={closeSnackbarTrainingError}>
+                <Alert onClose={closeSnackbarTrainingError} severity="error">
+                    Training data is not available!
                 </Alert>
             </Snackbar>
         </div>
