@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './Button.module.css';
+import clsx from 'clsx';
 
-const Button = ({ children, onClick }) => {
+const Button = ({ children, onClick, className }) => {
     return (
-        <button className={styles.custom_btn} onClick={onClick}>{children}</button>
+        <button className={clsx(className, styles.custom_btn)} onClick={onClick}>{children}</button>
     );
 };
 

@@ -22,3 +22,12 @@
 .muiSelect {
     text-align: center !important;
 }
+
+.disabledButton {
+    background-color: #8D99AE;
+}
+
+.disabledButton:hover {
+    background: #87909f
+  }
+  

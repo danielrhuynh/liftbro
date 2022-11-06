@@ -15,6 +15,7 @@ const Home = () => {
     const [dataCollecting, setDataCollecting] = useState(false);
     const [dataNotCollecting, setDataNotCollecting] = useState(false);
     const [isWaiting, setIsWaiting] = useState(false);
+    const [dataCollect, setDataCollect] = useState(false);
 
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
@@ -68,9 +69,11 @@ const Home = () => {
         }, 5000);
 
         setTimeout(() => {
+            //Potentially just call handlePoseEstimation lol
             openDataNotCollecting();
             stopPoseEstimation();
             setIsPoseEstimation(false);
+            setDataCollect(false);
             state = 'waiting';
             setIsCollectingData('inactive');
         }, 15000);
@@ -122,15 +125,17 @@ const Home = () => {
         }
         else {
             if (input === 'COLLECT_DATA') {
-                if (isPoseEstimation) {
+                if (isPoseEstimation || state === 'collecting' || isCollectingData === true) {
                     if (isCollectingData === 'inactive') {
                         setIsPoseEstimation(current => !current);
                         stopPoseEstimation();
+                        setDataCollect(false);
                         state = 'waiting';
                     }
                 } else {
                     if (workoutState.workout.length > 0) {
                         setIsPoseEstimation(!isPoseEstimation);
+                        setDataCollect(true);
                         collectData();
                     }
                 }
@@ -169,7 +174,7 @@ const Home = () => {
             <MediaContainer ref={ref} />
             <Grid container className={styles.gridContainer}>
                 <LiftCards />
-                <LiftForm handleWorkoutSelect={handleWorkoutSelect} workoutState={workoutState} handlePoseEstimation={handlePoseEstimation} isPoseEstimation={isPoseEstimation} />
+                <LiftForm handleWorkoutSelect={handleWorkoutSelect} workoutState={workoutState} handlePoseEstimation={handlePoseEstimation} isPoseEstimation={isPoseEstimation} dataCollect={dataCollect} />
             </Grid>
             <Snackbar open={dataCollecting} autoHideDuration={2500} onClose={closeDataCollecting}>
                 <Alert onClose={closeDataCollecting} severity="info">
@@ -183,7 +188,7 @@ const Home = () => {
             </Snackbar>
             <Snackbar open={isWaiting} autoHideDuration={2500} onClose={closeWait}>
                 <Alert onClose={closeWait} severity="error">
-                    Please wait
+                    Please wait!
                 </Alert>
             </Snackbar>
         </div>
