@@ -1,9 +1,10 @@
 import { Grid, Toolbar, Typography, Card, CardContent, CardActions, FormControl, InputLabel, NativeSelect, FormHelperText } from '@mui/material';
+import clsx from 'clsx';
 import { muiComponents } from '../muiComponentsOverride';
 import Button from '../Button/Button';
 import styles from './LiftForm.module.css';
 
-const LiftForm = ({handleWorkoutSelect, workoutState, handlePoseEstimation, isPoseEstimation}) => {
+const LiftForm = ({handleWorkoutSelect, workoutState, handlePoseEstimation, isPoseEstimation, dataCollect}) => {
     return (
         <Grid item xs className={styles.singleLineContainer}>
             <Toolbar className={styles.singleLine}>
@@ -22,8 +23,8 @@ const LiftForm = ({handleWorkoutSelect, workoutState, handlePoseEstimation, isPo
                     </NativeSelect>
                     <FormHelperText>Select training data type</FormHelperText>
                 </FormControl>
-                <Button onClick={() => handlePoseEstimation('COLLECT_DATA')} >{isPoseEstimation ? 'Stop' : 'Collect Data'}</Button>
-                <Button>Train Model</Button>
+                <Button onClick={() => handlePoseEstimation('COLLECT_DATA')} >{isPoseEstimation ? 'Collecting...' : 'Collect Data'}</Button>
+                <Button className={clsx(dataCollect && styles.disabledButton)}>Train Model</Button>
             </Toolbar>
         </Grid>
     );
