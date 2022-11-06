@@ -1,5 +1,4 @@
 .singleLineContainer {
-    width: 100%;
     min-width: 120px;
     padding: 10px;
     border-radius: 10px;
@@ -23,11 +22,18 @@
     text-align: center !important;
 }
 
+.menuButton {
+    background-color: #0494d9;
+}
+
+.menuButton:hover {
+    background-color: #23a2ef;
+}
+
 .disabledButton {
     background-color: #87909f;
 }
 
 .disabledButton:hover {
     background: #8D99AE;
-  }
-  
+}

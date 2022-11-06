@@ -4,10 +4,22 @@ import { muiComponents } from '../muiComponentsOverride';
 import Button from '../Button/Button';
 import styles from './LiftForm.module.css';
 
-const LiftForm = ({handleWorkoutSelect, workoutState, handlePoseEstimation, isPoseEstimation, dataCollect, handleTrainModel, trainModel }) => {
+const LiftForm = ({
+    handleWorkoutSelect,
+    workoutState,
+    handlePoseEstimation,
+    isPoseEstimation,
+    dataCollect,
+    handleTrainModel,
+    trainModel,
+    isPoseEstimationWorkout,
+    resetAll
+}) => {
     return (
         <Grid item xs className={styles.singleLineContainer}>
             <Toolbar className={styles.singleLine}>
+                <Button onClick={() => handlePoseEstimation('START_WORKOUT')} disabled={dataCollect || trainModel} className={clsx((dataCollect || trainModel) && styles.disabledButton, styles.menuButton)}>{isPoseEstimationWorkout ? 'Stop' : 'Start'} Workout</Button>
+                <Button onClick={() => resetAll()} disabled={dataCollect || trainModel || isPoseEstimationWorkout} className={clsx((dataCollect || trainModel || isPoseEstimationWorkout) && styles.disabledButton, styles.menuButton)}>Reset</Button>
                 <FormControl required className={styles.muiForm}>
                     <InputLabel htmlFor="age-native-helper" sx={muiComponents.muiInputLabel}>Movement</InputLabel>
                     <NativeSelect
@@ -23,9 +35,9 @@ const LiftForm = ({handleWorkoutSelect, workoutState, handlePoseEstimation, isPo
                     </NativeSelect>
                     <FormHelperText>Select training data type</FormHelperText>
                 </FormControl>
-                <Button className={clsx(trainModel && styles.disabledButton)} onClick={() => handlePoseEstimation('COLLECT_DATA')} disabled={trainModel}>{isPoseEstimation ? 'Collecting...' : 'Collect Data'}</Button>
+                <Button className={clsx((trainModel || isPoseEstimationWorkout) && styles.disabledButton)} onClick={() => handlePoseEstimation('COLLECT_DATA')} disabled={trainModel || isPoseEstimationWorkout}>{isPoseEstimation ? 'Stop' : 'Collect Data'}</Button>
                 <Button className={clsx(dataCollect && styles.disabledButton)} onClick={() => handleTrainModel()} disabled={dataCollect}>Train Model</Button>
-                {trainModel ? <CircularProgress color="secondary"/> : null}
+                {trainModel ? <CircularProgress color="secondary" /> : null}
             </Toolbar>
         </Grid>
     );

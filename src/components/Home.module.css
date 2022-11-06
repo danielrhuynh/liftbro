@@ -1,9 +1,14 @@
 .home {
     padding: 20px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .gridContainer {
     padding: 24px;
     margin: 0px;
     flex-direction: column !important;
+    justify-content: space-between;
 }

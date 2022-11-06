@@ -7,7 +7,6 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.12",
-    "@tensorflow-models/pose-detection": "^2.0.0",
     "@tensorflow-models/posenet": "^2.2.2",
     "@tensorflow/tfjs": "^4.0.0",
     "@testing-library/jest-dom": "^5.16.5",
