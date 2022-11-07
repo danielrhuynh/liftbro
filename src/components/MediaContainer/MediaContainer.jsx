@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import styles from './MediaContainer.module.css';
 import Webcam from 'react-webcam'
 

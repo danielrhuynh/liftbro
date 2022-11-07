@@ -13,6 +13,7 @@ export const muiComponents = {
         backgroundColor: '#8D99AE',
         borderRadius: '10px',
         width: '100%',
+        marginBottom: '10px',
     },
 
     cardItem: {
