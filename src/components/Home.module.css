@@ -19,3 +19,11 @@
     top: 50px;
     margin-bottom: 16px;
 }
+
+.disabledButton {
+    background-color: #87909f;
+}
+
+.disabledButton:hover {
+    background: #8D99AE;
+}

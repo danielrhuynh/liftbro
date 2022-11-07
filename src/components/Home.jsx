@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import clsx from 'clsx';
 import * as tf from '@tensorflow/tfjs';
 import * as posenet from '@tensorflow-models/posenet';
-import styles from './Home.module.css';
 import { Grid } from '@mui/material';
+import styles from './Home.module.css';
 
 import Button from './Button/Button';
 import MediaContainer from './MediaContainer/MediaContainer';
@@ -42,6 +43,7 @@ const Home = () => {
     const [trainingErrorSB, setTrainingErrorSB] = useState(false);
     const [workoutErrorSB, setWorkoutErrorSB] = useState(false);
     const [isWaiting, setIsWaiting] = useState(false);
+    const [resetSB, setResetSB] = useState(false);
 
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
@@ -127,6 +129,17 @@ const Home = () => {
         setWorkoutErrorSB(false);
     };
 
+    const openSnackbarReset = () => {
+        setResetSB(true);
+    };
+
+    const closeSnackbarReset = (reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setResetSB(false);
+    };
+
     const collectData = async () => {
         setCollectingDataOperation('active');
         await delay(10000);
@@ -160,6 +173,7 @@ const Home = () => {
         setLungesCount(0);
 
         indexedDB.deleteDatabase('tensorflowjs');
+        openSnackbarReset();
     }
 
     const loadPosenet = async () => {
@@ -260,6 +274,7 @@ const Home = () => {
                     state = 'waiting';
                     setDataCollect(false);
                 }
+                else openWait();
             } else {
                 if (workoutState.workout.length > 0) {
                     setIsPoseEstimation(current => !current);
@@ -301,6 +316,7 @@ const Home = () => {
     const clearCanvas = () => {
         const ctx = canvasRef.current.getContext("2d");
         ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        console.log('Canvas Cleared');
     }
 
     const handleWorkoutSelect = (event) => {
@@ -312,13 +328,16 @@ const Home = () => {
     };
 
     const handleTrainModel = async () => {
-        if (rawData.length > 0) {
-            setTrainModel(true);
-            const [numOfFeatures, convertedDatasetTraining, convertedDatasetValidation] = processData(rawData);
-            await runTraining(convertedDatasetTraining, convertedDatasetValidation, numOfFeatures);
-            setTrainModel(false);
-        } else {
-            openSnackbarTrainingError();
+        if (trainModel) openWait();
+        else {
+            if (rawData.length > 0) {
+                setTrainModel(true);
+                const [numOfFeatures, convertedDatasetTraining, convertedDatasetValidation] = processData(rawData);
+                await runTraining(convertedDatasetTraining, convertedDatasetValidation, numOfFeatures);
+                setTrainModel(false);
+            } else {
+                openSnackbarTrainingError();
+            }
         }
     };
 
@@ -328,7 +347,7 @@ const Home = () => {
 
     return (
         <div className={styles.home}>
-            <Button onClick={ async () => { navigateToLaunch() }} className={styles.backButton}>Go Back</Button>
+            <Button onClick={async () => { navigateToLaunch() }} className={clsx((isPoseEstimation || trainModel || isPoseEstimationWorkout) && styles.disabledButton, styles.backButton)} disabled={isPoseEstimation || trainModel || isPoseEstimationWorkout}>Go Back</Button>
             <MediaContainer ref={ref} />
             <Grid container className={styles.gridContainer}>
                 <LiftCards jumpingJackCount={jumpingJackCount} wallSitCount={wallSitCount} lungesCount={lungesCount} />
@@ -355,6 +374,8 @@ const Home = () => {
                 closeSnackbarTrainingError={closeSnackbarTrainingError}
                 workoutErrorSB={workoutErrorSB}
                 closeSnackbarWorkoutError={closeSnackbarWorkoutError}
+                resetSB={resetSB}
+                closeSnackbarReset={closeSnackbarReset}
             />
         </div>
     );

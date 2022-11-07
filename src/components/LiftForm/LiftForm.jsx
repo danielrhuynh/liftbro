@@ -37,8 +37,8 @@ const LiftForm = ({
                     <FormHelperText>Select training data type</FormHelperText>
                 </FormControl>
                 <Button className={clsx((trainModel || isPoseEstimationWorkout) && styles.disabledButton)} onClick={() => handlePoseEstimation('COLLECT_DATA')} disabled={trainModel || isPoseEstimationWorkout}>{isPoseEstimation ? 'Stop' : 'Collect Data'}</Button>
-                <Button className={clsx(dataCollect && styles.disabledButton)} onClick={() => handleTrainModel()} disabled={dataCollect}>Train Model</Button>
-                {trainModel ? <CircularProgress color="secondary" /> : null}
+                <Button className={clsx((dataCollect || isPoseEstimationWorkout) && styles.disabledButton)} onClick={() => handleTrainModel()} disabled={dataCollect || isPoseEstimationWorkout}>Train Model</Button>
+                {trainModel || isPoseEstimation ? <CircularProgress color="inherit" /> : null}
             </Toolbar>
         </Grid>
     );

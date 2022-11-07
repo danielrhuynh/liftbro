@@ -25,7 +25,7 @@ function buildModel(numOfFeatures) {
 export async function runTraining(convertedDatasetTraining, convertedDatasetValidation, numOfFeatures) {
     const model = buildModel(numOfFeatures);
 
-    const history = await model.fitDataset(
+    await model.fitDataset(
         convertedDatasetTraining,
         {
             epochs: 100,

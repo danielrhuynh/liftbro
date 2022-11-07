@@ -11,6 +11,8 @@ const Snackbars = ({
     closeSnackbarTrainingError,
     workoutErrorSB,
     closeSnackbarWorkoutError,
+    resetSB,
+    closeSnackbarReset
 }) => {
     return (
         <div>
@@ -37,6 +39,11 @@ const Snackbars = ({
             <Snackbar open={workoutErrorSB} autoHideDuration={2000} onClose={closeSnackbarWorkoutError}>
                 <Alert onClose={closeSnackbarWorkoutError} severity="error">
                     Model is not available!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={resetSB} autoHideDuration={2000} onClose={closeSnackbarReset}>
+                <Alert onClose={closeSnackbarReset} severity="error">
+                    Workout and model data reset!
                 </Alert>
             </Snackbar>
         </div>
