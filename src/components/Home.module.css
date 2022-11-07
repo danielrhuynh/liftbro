@@ -12,3 +12,10 @@
     flex-direction: column !important;
     justify-content: space-between;
 }
+
+.backButton {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    margin-bottom: 16px;
+}

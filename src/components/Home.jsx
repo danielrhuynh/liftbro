@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as tf from '@tensorflow/tfjs';
 import * as posenet from '@tensorflow-models/posenet';
 import styles from './Home.module.css';
 import { Grid } from '@mui/material';
 
+import Button from './Button/Button';
 import MediaContainer from './MediaContainer/MediaContainer';
 import LiftCards from './LiftCards/LiftCards';
 import LiftForm from './LiftForm/LiftForm';
@@ -45,6 +47,11 @@ const Home = () => {
     const canvasRef = useRef(null);
     const poseEstimationLoop = useRef(null);
 
+    const navigate = useNavigate();
+    const navigateToLaunch = () => {
+        navigate("/");
+    }
+
     const ref = {
         webcamRef: webcamRef,
         canvasRef: canvasRef
@@ -55,6 +62,8 @@ const Home = () => {
     let modelWorkout = null;
     let workoutCallDelay = false;
     let workoutDelayStart = 0;
+    const windowWidth = 640;
+    const windowHeight = 480;
 
     const [jumpingJackCount, setJumpingJackCount] = useState(0);
     let jjCount = 0;
@@ -62,9 +71,6 @@ const Home = () => {
     let wsCount = 0;
     const [lungesCount, setLungesCount] = useState(0);
     let lCount = 0;
-
-    const windowWidth = 640;
-    const windowHeight = 480;
 
     const openDataCollecting = () => {
         setDataCollectingSB(true);
@@ -103,7 +109,7 @@ const Home = () => {
         setTrainingErrorSB(true);
     };
 
-    const closeSnackbarTrainingError = (event, reason) => {
+    const closeSnackbarTrainingError = (reason) => {
         if (reason === 'clickaway') {
             return;
         }
@@ -114,7 +120,7 @@ const Home = () => {
         setWorkoutErrorSB(true);
     };
 
-    const closeSnackbarWorkoutError = (event, reason) => {
+    const closeSnackbarWorkoutError = (reason) => {
         if (reason === 'clickaway') {
             return;
         }
@@ -126,13 +132,11 @@ const Home = () => {
         await delay(10000);
 
         openDataCollecting();
-        console.log('collecting');
         state = 'collecting';
 
         await delay(30000);
 
         openDataNotCollecting();
-        console.log('not collecting');
         state = 'waiting';
 
         setCollectingDataOperation('inactive');
@@ -146,6 +150,16 @@ const Home = () => {
 
             localStorage.setItem(workoutType, parseInt(workoutCount) + 1);
         }
+    }
+
+    const resetAll = async () => {
+        setRawData([]);
+
+        setJumpingJackCount(0);
+        setWallSitCount(0);
+        setLungesCount(0);
+
+        indexedDB.deleteDatabase('tensorflowjs');
     }
 
     const loadPosenet = async () => {
@@ -187,9 +201,7 @@ const Home = () => {
                         inputs.push(y);
                     }
 
-                    console.log('STATE->' + state);
                     if (state === 'collecting') {
-                        console.log(workoutState.workout);
 
                         const rawDataRow = { xs: inputs, ys: workoutState.workout };
                         rawData.push(rawDataRow);
@@ -240,41 +252,41 @@ const Home = () => {
 
     const handlePoseEstimation = async (input) => {
 
-            if (input === 'COLLECT_DATA') {
-                if (isPoseEstimation) {
-                    if (collectingDataOpperation === 'inactive') {
-                        setIsPoseEstimation(current => !current);
-                        stopPoseEstimation();
-                        state = 'waiting';
-                        setDataCollect(false);
-                    }
-                } else {
-                    if (workoutState.workout.length > 0) {
-                        setIsPoseEstimation(current => !current);
-                        startPoseEstimation();
-                        collectData();
-                        setDataCollect(true);
-                    }
-                }
-            }
-
-            if (input === 'START_WORKOUT') {
-                if (isPoseEstimationWorkout) {
-                    runningWorkout = false;
-                    setIsPoseEstimationWorkout(false);
+        if (input === 'COLLECT_DATA') {
+            if (isPoseEstimation) {
+                if (collectingDataOpperation === 'inactive') {
+                    setIsPoseEstimation(current => !current);
                     stopPoseEstimation();
-                } else {
-                    runningWorkout = true;
-                    try {
-                        modelWorkout = await tf.loadLayersModel('indexeddb://fitness-assistant-model');
-                        setIsPoseEstimationWorkout(true);
-                        startPoseEstimation();
-                    } catch (err) {
-                        openSnackbarWorkoutError();
-                    }
+                    state = 'waiting';
+                    setDataCollect(false);
+                }
+            } else {
+                if (workoutState.workout.length > 0) {
+                    setIsPoseEstimation(current => !current);
+                    startPoseEstimation();
+                    collectData();
+                    setDataCollect(true);
                 }
             }
-        
+        }
+
+        if (input === 'START_WORKOUT') {
+            if (isPoseEstimationWorkout) {
+                runningWorkout = false;
+                setIsPoseEstimationWorkout(false);
+                stopPoseEstimation();
+            } else {
+                runningWorkout = true;
+                try {
+                    modelWorkout = await tf.loadLayersModel('indexeddb://fitness-assistant-model');
+                    setIsPoseEstimationWorkout(true);
+                    startPoseEstimation();
+                } catch (err) {
+                    openSnackbarWorkoutError();
+                }
+            }
+        }
+
     };
 
     const drawCanvas = (pose, videoWidth, videoHeight, canvas) => {
@@ -301,7 +313,6 @@ const Home = () => {
 
     const handleTrainModel = async () => {
         if (rawData.length > 0) {
-            console.log('Data size: ' + rawData.length);
             setTrainModel(true);
             const [numOfFeatures, convertedDatasetTraining, convertedDatasetValidation] = processData(rawData);
             await runTraining(convertedDatasetTraining, convertedDatasetValidation, numOfFeatures);
@@ -311,22 +322,13 @@ const Home = () => {
         }
     };
 
-    const resetAll = async () => {
-        setRawData([]);
-
-        setJumpingJackCount(0);
-        setWallSitCount(0);
-        setLungesCount(0);
-
-        indexedDB.deleteDatabase('tensorflowjs');
-    }
-
     useEffect(() => {
         loadPosenet();
     }, []);
 
     return (
         <div className={styles.home}>
+            <Button onClick={ async () => { navigateToLaunch() }} className={styles.backButton}>Go Back</Button>
             <MediaContainer ref={ref} />
             <Grid container className={styles.gridContainer}>
                 <LiftCards jumpingJackCount={jumpingJackCount} wallSitCount={wallSitCount} lungesCount={lungesCount} />
