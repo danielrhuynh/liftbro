@@ -69,10 +69,10 @@ const Home = () => {
 
     const [jumpingJackCount, setJumpingJackCount] = useState(0);
     let jjCount = 0;
-    const [wallSitCount, setWallSitCount] = useState(0);
-    let wsCount = 0;
-    const [lungesCount, setLungesCount] = useState(0);
-    let lCount = 0;
+    const [pushupCount, setPushupCount] = useState(0);
+    let pCount = 0;
+    const [squatCount, setSquatCount] = useState(0);
+    let scount = 0;
 
     const openDataCollecting = () => {
         setDataCollectingSB(true);
@@ -169,8 +169,8 @@ const Home = () => {
         setRawData([]);
 
         setJumpingJackCount(0);
-        setWallSitCount(0);
-        setLungesCount(0);
+        setPushupCount(0);
+        setSquatCount(0);
 
         indexedDB.deleteDatabase('tensorflowjs');
         openSnackbarReset();
@@ -232,14 +232,14 @@ const Home = () => {
                                     jjCount += 1;
                                     setJumpingJackCount(jjCount);
                                     updateStats('JUMPING_JACKS');
-                                } else if (result === 'WALL_SIT') {
-                                    wsCount += 1;
-                                    setWallSitCount(wsCount);
-                                    updateStats('WALL_SIT');
-                                } else if (result === 'LUNGES') {
-                                    lCount += 1;
-                                    setLungesCount(lCount);
-                                    updateStats('LUNGES');
+                                } else if (result === 'PUSHUPS') {
+                                    pCount += 1;
+                                    setPushupCount(pCount);
+                                    updateStats('PUSHUPS');
+                                } else if (result === 'SQUATS') {
+                                    scount += 1;
+                                    setSquatCount(scount);
+                                    updateStats('SQUATS');
                                 }
                                 workoutCallDelay = true;
                                 workoutDelayStart = new Date().getTime();
@@ -350,7 +350,7 @@ const Home = () => {
             <Button onClick={async () => { navigateToLaunch() }} className={clsx((isPoseEstimation || trainModel || isPoseEstimationWorkout) && styles.disabledButton, styles.backButton)} disabled={isPoseEstimation || trainModel || isPoseEstimationWorkout}>Go Back</Button>
             <MediaContainer ref={ref} />
             <Grid container className={styles.gridContainer}>
-                <LiftCards jumpingJackCount={jumpingJackCount} wallSitCount={wallSitCount} lungesCount={lungesCount} />
+                <LiftCards jumpingJackCount={jumpingJackCount} pushupCount={pushupCount} squatCount={squatCount} />
                 <LiftForm
                     handleWorkoutSelect={handleWorkoutSelect}
                     workoutState={workoutState}

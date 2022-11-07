@@ -9,7 +9,7 @@ export function runInference(model, data) {
 
     let result = null;
     if (probability > 0.99) {
-        const classNames = ["JUMPING_JACKS", "WALL_SIT", "LUNGES"];
+        const classNames = ["JUMPING_JACKS", "PUSHUPS", "SQUATS"];
         console.log(classNames[pIndex] + ', probability: ' + probability);
         result = classNames[pIndex];
     }

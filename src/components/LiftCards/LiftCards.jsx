@@ -1,7 +1,7 @@
 import { Grid, Toolbar, Typography, Card, CardContent } from '@mui/material';
 import { muiComponents } from '../muiComponentsOverride';
 
-const LiftCards = ({ jumpingJackCount, wallSitCount, lungesCount }) => {
+const LiftCards = ({ jumpingJackCount, pushupCount, squatCount }) => {
     return (
         <Grid item xs sx={muiComponents.gridItem}>
             <Card sx={muiComponents.cardContainer}>
@@ -14,14 +14,14 @@ const LiftCards = ({ jumpingJackCount, wallSitCount, lungesCount }) => {
                     </Card>
                     <Card sx={muiComponents.cardItem}>
                         <CardContent>
-                            <Typography color="#2B2D42" gutterBottom>Wall-sit</Typography>
-                            <Typography variant="h3" component="h3" color="#2B2D42">{wallSitCount} s.</Typography>
+                            <Typography color="#2B2D42" gutterBottom>Pushups</Typography>
+                            <Typography variant="h3" component="h3" color="#2B2D42">{pushupCount} s.</Typography>
                         </CardContent>
                     </Card>
                     <Card sx={muiComponents.cardItem}>
                         <CardContent>
-                            <Typography color="#2B2D42" gutterBottom>Lunges</Typography>
-                            <Typography variant="h3" component="h3" color="#2B2D42">{lungesCount} s.</Typography>
+                            <Typography color="#2B2D42" gutterBottom>Squats</Typography>
+                            <Typography variant="h3" component="h3" color="#2B2D42">{squatCount} s.</Typography>
                         </CardContent>
                     </Card>
                 </Toolbar>
