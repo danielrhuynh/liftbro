@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './Button.module.css';
 import clsx from 'clsx';
+
+import styles from './Button.module.css';
 
 const Button = ({ children, onClick, className, disabled }) => {
     return (

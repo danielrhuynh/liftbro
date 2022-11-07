@@ -1,15 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
+import * as tf from '@tensorflow/tfjs';
+import * as posenet from '@tensorflow-models/posenet';
 import styles from './Home.module.css';
+import { Grid } from '@mui/material';
+
 import MediaContainer from './MediaContainer/MediaContainer';
 import LiftCards from './LiftCards/LiftCards';
-import { Grid, Snackbar, Alert } from '@mui/material';
 import LiftForm from './LiftForm/LiftForm';
-import * as posenet from '@tensorflow-models/posenet';
+import Snackbars from './Snackbars/Snackbars';
+
 import { drawKeypoints, drawSkeleton } from './utils/canvas';
 import { processData } from './utils/dataProcessing';
 import { runTraining } from './utils/modelTraining';
 import { runInference } from './utils/modelInference';
-import * as tf from '@tensorflow/tfjs';
 
 const delay = (time) => {
     return new Promise((resolve, reject) => {
@@ -236,8 +239,6 @@ const Home = () => {
     }
 
     const handlePoseEstimation = async (input) => {
-        if (isPoseEstimationWorkout || state === 'collecting') openWait();
-        else {
 
             if (input === 'COLLECT_DATA') {
                 if (isPoseEstimation) {
@@ -273,7 +274,7 @@ const Home = () => {
                     }
                 }
             }
-        }
+        
     };
 
     const drawCanvas = (pose, videoWidth, videoHeight, canvas) => {
@@ -341,31 +342,18 @@ const Home = () => {
                     resetAll={resetAll}
                 />
             </Grid>
-            <Snackbar open={dataCollectingSB} autoHideDuration={2500} onClose={closeDataCollecting}>
-                <Alert onClose={closeDataCollecting} severity="info">
-                    Started collecting pose data!
-                </Alert>
-            </Snackbar>
-            <Snackbar open={dataNotCollectingSB} autoHideDuration={2500} onClose={closeDataNotCollecting}>
-                <Alert onClose={closeDataNotCollecting} severity="success">
-                    Completed collecting pose data!
-                </Alert>
-            </Snackbar>
-            <Snackbar open={isWaiting} autoHideDuration={2500} onClose={closeWait}>
-                <Alert onClose={closeWait} severity="error">
-                    Please wait!
-                </Alert>
-            </Snackbar>
-            <Snackbar open={trainingErrorSB} autoHideDuration={2000} onClose={closeSnackbarTrainingError}>
-                <Alert onClose={closeSnackbarTrainingError} severity="error">
-                    Training data is not available!
-                </Alert>
-            </Snackbar>
-            <Snackbar open={workoutErrorSB} autoHideDuration={2000} onClose={closeSnackbarWorkoutError}>
-                <Alert onClose={closeSnackbarWorkoutError} severity="error">
-                    Model is not available!
-                </Alert>
-            </Snackbar>
+            <Snackbars
+                dataCollectingSB={dataCollectingSB}
+                closeDataCollecting={closeDataCollecting}
+                dataNotCollectingSB={dataNotCollectingSB}
+                closeDataNotCollecting={closeDataNotCollecting}
+                isWaiting={isWaiting}
+                closeWait={closeWait}
+                trainingErrorSB={trainingErrorSB}
+                closeSnackbarTrainingError={closeSnackbarTrainingError}
+                workoutErrorSB={workoutErrorSB}
+                closeSnackbarWorkoutError={closeSnackbarWorkoutError}
+            />
         </div>
     );
 }
