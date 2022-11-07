@@ -26,16 +26,17 @@ const Home = () => {
     const [isPoseEstimation, setIsPoseEstimation] = useState(false)
     const [isPoseEstimationWorkout, setIsPoseEstimationWorkout] = useState(false);
     const [workoutState, setWorkoutState] = useState({ workout: '', name: 'Dan', });
-    const [isCollectingData, setIsCollectingData] = useState('inactive');
-    const [dataCollecting, setDataCollecting] = useState(false);
-    const [dataNotCollecting, setDataNotCollecting] = useState(false);
-    const [isWaiting, setIsWaiting] = useState(false);
+    const [collectingDataOpperation, setCollectingDataOperation] = useState('inactive');
 
     const [dataCollect, setDataCollect] = useState(false);
     const [trainModel, setTrainModel] = useState(false);
     const [rawData, setRawData] = useState([]);
-    const [snackbarTrainingError, setSnackbarTrainingError] = useState(false);
-    const [snackbarWorkoutError, setSnackbarWorkoutError] = useState(false);
+
+    const [dataCollectingSB, setDataCollectingSB] = useState(false);
+    const [dataNotCollectingSB, setDataNotCollectingSB] = useState(false);
+    const [trainingErrorSB, setTrainingErrorSB] = useState(false);
+    const [workoutErrorSB, setWorkoutErrorSB] = useState(false);
+    const [isWaiting, setIsWaiting] = useState(false);
 
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
@@ -63,25 +64,25 @@ const Home = () => {
     const windowHeight = 480;
 
     const openDataCollecting = () => {
-        setDataCollecting(true);
+        setDataCollectingSB(true);
     };
 
     const closeDataCollecting = (reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setDataCollecting(false);
+        setDataCollectingSB(false);
     };
 
     const openDataNotCollecting = () => {
-        setDataNotCollecting(true);
+        setDataNotCollectingSB(true);
     };
 
     const closeDataNotCollecting = (reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setDataNotCollecting(false);
+        setDataNotCollectingSB(false);
     };
 
     const openWait = () => {
@@ -96,29 +97,29 @@ const Home = () => {
     };
 
     const openSnackbarTrainingError = () => {
-        setSnackbarTrainingError(true);
+        setTrainingErrorSB(true);
     };
 
     const closeSnackbarTrainingError = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setSnackbarTrainingError(false);
+        setTrainingErrorSB(false);
     };
 
     const openSnackbarWorkoutError = () => {
-        setSnackbarWorkoutError(true);
+        setWorkoutErrorSB(true);
     };
 
     const closeSnackbarWorkoutError = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setSnackbarWorkoutError(false);
+        setWorkoutErrorSB(false);
     };
 
     const collectData = async () => {
-        setIsCollectingData('active');
+        setCollectingDataOperation('active');
         await delay(10000);
 
         openDataCollecting();
@@ -131,7 +132,7 @@ const Home = () => {
         console.log('not collecting');
         state = 'waiting';
 
-        setIsCollectingData('inactive');
+        setCollectingDataOperation('inactive');
     };
 
     const updateStats = (workoutType) => {
@@ -240,7 +241,7 @@ const Home = () => {
 
             if (input === 'COLLECT_DATA') {
                 if (isPoseEstimation) {
-                    if (isCollectingData === 'inactive') {
+                    if (collectingDataOpperation === 'inactive') {
                         setIsPoseEstimation(current => !current);
                         stopPoseEstimation();
                         state = 'waiting';
@@ -340,12 +341,12 @@ const Home = () => {
                     resetAll={resetAll}
                 />
             </Grid>
-            <Snackbar open={dataCollecting} autoHideDuration={2500} onClose={closeDataCollecting}>
+            <Snackbar open={dataCollectingSB} autoHideDuration={2500} onClose={closeDataCollecting}>
                 <Alert onClose={closeDataCollecting} severity="info">
                     Started collecting pose data!
                 </Alert>
             </Snackbar>
-            <Snackbar open={dataNotCollecting} autoHideDuration={2500} onClose={closeDataNotCollecting}>
+            <Snackbar open={dataNotCollectingSB} autoHideDuration={2500} onClose={closeDataNotCollecting}>
                 <Alert onClose={closeDataNotCollecting} severity="success">
                     Completed collecting pose data!
                 </Alert>
@@ -355,12 +356,12 @@ const Home = () => {
                     Please wait!
                 </Alert>
             </Snackbar>
-            <Snackbar open={snackbarTrainingError} autoHideDuration={2000} onClose={closeSnackbarTrainingError}>
+            <Snackbar open={trainingErrorSB} autoHideDuration={2000} onClose={closeSnackbarTrainingError}>
                 <Alert onClose={closeSnackbarTrainingError} severity="error">
                     Training data is not available!
                 </Alert>
             </Snackbar>
-            <Snackbar open={snackbarWorkoutError} autoHideDuration={2000} onClose={closeSnackbarWorkoutError}>
+            <Snackbar open={workoutErrorSB} autoHideDuration={2000} onClose={closeSnackbarWorkoutError}>
                 <Alert onClose={closeSnackbarWorkoutError} severity="error">
                     Model is not available!
                 </Alert>
