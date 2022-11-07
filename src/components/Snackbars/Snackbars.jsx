@@ -42,7 +42,7 @@ const Snackbars = ({
                 </Alert>
             </Snackbar>
             <Snackbar open={resetSB} autoHideDuration={2000} onClose={closeSnackbarReset}>
-                <Alert onClose={closeSnackbarReset} severity="error">
+                <Alert onClose={closeSnackbarReset} severity="success">
                     Workout and model data reset!
                 </Alert>
             </Snackbar>
