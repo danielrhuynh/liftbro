@@ -44,8 +44,8 @@ const LiftForm = ({
                     >
                         <option aria-label="None" value="" />
                         <option value={'JUMPING_JACKS'}>Jumping Jacks</option>
-                        <option value={'WALL_SIT'}>Wall-Sit</option>
-                        <option value={'LUNGES'}>Lunges</option>
+                        <option value={'PUSHUPS'}>Pushups</option>
+                        <option value={'SQUATS'}>Squats</option>
                     </NativeSelect>
                     <FormHelperText>Select training data type</FormHelperText>
                 </FormControl>

@@ -12,8 +12,8 @@ export function processData(rawData) {
         rawDatasetTraining.map(({ xs, ys }) => {
             const labels = [
                 ys === "JUMPING_JACKS" ? 1 : 0,
-                ys === "WALL_SIT" ? 1 : 0,
-                ys === "LUNGES" ? 1 : 0
+                ys === "PUSHUPS" ? 1 : 0,
+                ys === "SQUATS" ? 1 : 0
             ]
             return { xs: Object.values(xs), ys: Object.values(labels) };
         }).batch(30);
@@ -22,8 +22,8 @@ export function processData(rawData) {
         rawDatasetValidation.map(({ xs, ys }) => {
             const labels = [
                 ys === "JUMPING_JACKS" ? 1 : 0,
-                ys === "WALL_SIT" ? 1 : 0,
-                ys === "LUNGES" ? 1 : 0
+                ys === "PUSHUPS" ? 1 : 0,
+                ys === "SQUATS" ? 1 : 0
             ]
             return { xs: Object.values(xs), ys: Object.values(labels) };
         }).batch(30);
