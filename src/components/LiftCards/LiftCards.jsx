@@ -3,7 +3,6 @@ import { muiComponents } from '../muiComponentsOverride';
 
 const LiftCards = ({ jumpingJackCount, pushupCount, squatCount }) => {
     return (
-        // <Grid item xs sx={muiComponents.gridItem}>
             <Card sx={muiComponents.cardContainer}>
                 <Toolbar sx={muiComponents.toolbar}>
                     <Card sx={muiComponents.cardItem}>
@@ -26,7 +25,6 @@ const LiftCards = ({ jumpingJackCount, pushupCount, squatCount }) => {
                     </Card>
                 </Toolbar>
             </Card>
-        // </Grid>
     );
 }
 
