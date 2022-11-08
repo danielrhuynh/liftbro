@@ -1,4 +1,4 @@
-import { Grid, Toolbar, Typography, Card, CardContent } from '@mui/material';
+import { Toolbar, Typography, Card, CardContent } from '@mui/material';
 import { muiComponents } from '../muiComponentsOverride';
 
 const LiftCards = ({ jumpingJackCount, pushupCount, squatCount }) => {
