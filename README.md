@@ -23,10 +23,9 @@ To get started:
 ### `npm install npm@latest -g`
 2. Clone the repo
 ### `git clone https://github.com/Danryanh7/liftbro.git`
-3. Navigate to src
-4. Install dependancies
+3. Install dependancies
 ### `npm i`
-5. Serve using electron
+4. Serve using electron
 ### `npm run electron:serve`
 
 # License
