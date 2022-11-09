@@ -1,7 +1,7 @@
 # Overview
 
 Your PT that you train!
-LiftBro is an electron application that allows you to teach a ML model what several excerises look like by demonstration, and then have LiftBro track your workout by time spend on different movements!
+LiftBro is an electron application that allows you to teach a ML model what several excerises look like by demonstration, and then have LiftBro track your workout by time spent on different movements!
 
 ## Built With
 * Node.js
