@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Your PT that you train!
+LiftBro is an electron application that allows you to teach a ML model what several excerises look like by demonstration, and then have LiftBro track your workout and log time spent on different movements!
 
-## Available Scripts
+## Built With
+* Node.js
+* Yarn
+* React.js
+* React Router DOM
+* React Webcam
+* Electron
+* Material-UI
+* TensorFlow
+* PoseNet
 
-In the project directory, you can run:
+## Demos
+### Landing Page
+<img width="1173" alt="Screen Shot 2022-11-08 at 7 48 11 PM" src="https://user-images.githubusercontent.com/89366190/200710208-d6c05c2c-11cd-4a3a-9e4d-397789ad2e0b.png">
 
-### `npm start`
+### Home Page
+<img width="1140" alt="Screen Shot 2022-11-08 at 7 56 35 PM" src="https://user-images.githubusercontent.com/89366190/200710245-7cb60419-a71a-4978-a66e-362caff29bcb.png">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Collecting Data
+<img width="1063" alt="Screen Shot 2022-11-08 at 7 57 50 PM" src="https://user-images.githubusercontent.com/89366190/200710268-c1c9514a-ac71-422b-becd-f9ca84ff8616.png">
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Training Model
+<img width="1063" alt="Screen Shot 2022-11-08 at 7 58 24 PM" src="https://user-images.githubusercontent.com/89366190/200710309-c40848d6-cdc7-413b-9fbe-eb81526f6e08.png">
 
-### `npm test`
+### Working Out
+<img width="1065" alt="Screen Shot 2022-11-08 at 7 58 50 PM" src="https://user-images.githubusercontent.com/89366190/200710345-b5980ae6-de11-4bfd-a537-0f796feb83b5.png">
+<img width="1062" alt="Screen Shot 2022-11-08 at 7 59 41 PM" src="https://user-images.githubusercontent.com/89366190/200710405-149a02f4-0af6-4525-9665-a5c6aa11633f.png">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Getting Started
 
-### `npm run build`
+To get started:
+1. Install the latest npm
+### `npm install npm@latest -g`
+2. Clone the repo
+### `git clone https://github.com/Danryanh7/liftbro.git`
+3. Install dependancies
+### `npm i`
+4. Serve using electron
+### `npm run electron:serve`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# License
+Distributed under the MIT License. See `LICENSE` for more information.
