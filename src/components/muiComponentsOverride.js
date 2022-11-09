@@ -12,8 +12,8 @@ export const muiComponents = {
         padding: '10px',
         backgroundColor: '#8D99AE',
         borderRadius: '10px',
-        width: '100%',
-        marginBottom: '10px',
+        marginBottom: '16px',
+        height: '125.61px',
     },
 
     cardItem: {
