@@ -1,7 +1,7 @@
 <div align = center>
   <h1>LiftBro</h1>
   <div>
-    <a href="https://liftbro.herokuapp.com/">
+    <a href="https://liftbro.herokuapp.com/" target="_blank">
       <img height = 75px width = auto src="public/favicon.ico" alt="Link to LiftBro"/>
     </a>
   </div>
