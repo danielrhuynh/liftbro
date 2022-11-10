@@ -15,7 +15,6 @@ LiftBro is an electron application that allows you to teach a ML model what seve
 
 ## Built With
 * Node.js
-* Yarn
 * React.js
 * React Router DOM
 * React Webcam
