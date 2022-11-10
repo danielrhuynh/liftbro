@@ -1,3 +1,13 @@
+<div align = center>
+  <h1>LiftBro</h1>
+  <div>
+    <a href="https://liftbro.herokuapp.com/" target="_blank">
+      <img height = 75px width = auto src="public/favicon.ico" alt="Link to LiftBro"/>
+    </a>
+  </div>
+  <p>👆 Click to try it out! (hosting LiftBro on Heroku with free Dyno's so the load might be a bit slow lol)</p>
+</div>
+  
 # Overview
 
 Your PT that you train!
@@ -5,7 +15,6 @@ LiftBro is an electron application that allows you to teach a ML model what seve
 
 ## Built With
 * Node.js
-* Yarn
 * React.js
 * React Router DOM
 * React Webcam
