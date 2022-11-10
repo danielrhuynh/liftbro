@@ -16,7 +16,7 @@ LiftBro is an electron application that allows you to teach a ML model what seve
 
 ## Demos
 ### Landing Page
-<img width="1173" alt="Screen Shot 2022-11-08 at 7 48 11 PM" src="https://user-images.githubusercontent.com/89366190/200710208-d6c05c2c-11cd-4a3a-9e4d-397789ad2e0b.png">
+<img width="1724" alt="Screen Shot 2022-11-09 at 9 15 17 AM" src="https://user-images.githubusercontent.com/89366190/200854364-6186b0bd-4022-4df8-9db5-bab6aa7eacfe.png">
 
 ### Home Page
 <img width="1140" alt="Screen Shot 2022-11-08 at 7 56 35 PM" src="https://user-images.githubusercontent.com/89366190/200710245-7cb60419-a71a-4978-a66e-362caff29bcb.png">
